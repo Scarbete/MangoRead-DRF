@@ -7,8 +7,8 @@ from apps.users.manager import CustomUserManager
 
 # Create your models here.
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    nickname = models.CharField(max_length=100, unique=True)
-    username = models.CharField(max_length=100,  unique=True)
+    nickname = models.CharField(max_length=100)
+    username = models.CharField(max_length=100, unique=True)
     image = models.ImageField(upload_to='media/avatars/', blank=True, null=True, verbose_name='image_user')
     date_of_birth = models.DateField(null=True)
     is_staff = models.BooleanField(default=False)
@@ -17,6 +17,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     objects = CustomUserManager()
 
     USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['nickname']
 
     class Meta:
         verbose_name = 'Пользователь'

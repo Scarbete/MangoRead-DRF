@@ -9,9 +9,11 @@ class TipSerializer(serializers.ModelSerializer):
 
 
 class ReviewSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
     class Meta:
         model = Review
-        fields = 'id text stars manga'.split()
+        fields = 'id user text stars manga'.split()
 
 
 class AuthorSerializer(serializers.ModelSerializer):
