@@ -1,0 +1,37 @@
+
+from .permissions import IsAuthicatedOrReadOnly
+from .serializers import *
+from .models import *
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.viewsets import ModelViewSet
+from django_filters.rest_framework import DjangoFilterBackend
+
+class MangaViewSet(ModelViewSet):
+    queryset = Manga.objects.all()
+    serializer_class = MangaSerializer
+    pagination_class = PageNumberPagination
+    filter_backends = [DjangoFilterBackend]
+    filter_fields = ['title']
+
+class AuthorViewSet(ModelViewSet):
+    queryset = Author.objects.all()
+    serializer_class = AuthorSerializer
+    pagination_class = PageNumberPagination
+
+
+class GenreViewSet(ModelViewSet):
+    queryset = Genre.objects.all()
+    serializer_class = GenreSerializer
+    pagination_class = PageNumberPagination
+
+
+class ReviewViewSet(ModelViewSet):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+    permission_classes = [IsAuthicatedOrReadOnly]
+
+
+class TipViewSet(ModelViewSet):
+    queryset = Tip.objects.all()
+    serializer_class = TipSerializer
+    pagination_class = PageNumberPagination
