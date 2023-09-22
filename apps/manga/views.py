@@ -1,4 +1,6 @@
 
+from .filters import MangaFilter
+from .paginations import MangaPagination
 from .permissions import IsAuthicatedOrReadOnly
 from .serializers import *
 from .models import *
@@ -9,9 +11,10 @@ from django_filters.rest_framework import DjangoFilterBackend
 class MangaViewSet(ModelViewSet):
     queryset = Manga.objects.all()
     serializer_class = MangaSerializer
-    pagination_class = PageNumberPagination
+    pagination_class = MangaPagination
     filter_backends = [DjangoFilterBackend]
-    filter_fields = ['title']
+    filterset_class = MangaFilter
+
 
 class AuthorViewSet(ModelViewSet):
     queryset = Author.objects.all()
