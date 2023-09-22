@@ -37,7 +37,7 @@ class MangaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Manga
-        fields = 'id title description status_release status_translate ' \
+        fields = 'id title image description status_release status_translate ' \
                  'number_of_chapters created genre_list manga_review tip author updated release_year ' \
                  'rating views genre'.split()
 
