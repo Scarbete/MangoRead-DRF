@@ -1,6 +1,5 @@
 from django.db import models
 
-from apps.manga.constants import CHOICES
 from apps.users.models import CustomUser
 
 
@@ -43,15 +42,6 @@ class Manga(models.Model):
     def __str__(self):
         return self.title
 
-    @property
-    def rating(self):
-        count = self.manga_review.count()
-        if count == 0:
-            return 'мангу пока никто не читал'
-        total = 0
-        for i in self.manga_review.all():
-            total += i.stars
-        return total / count
 
     @property
     def chapters(self):
@@ -63,7 +53,6 @@ class Manga(models.Model):
 class Review(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     text = models.TextField(null=True, blank=True)
-    stars = models.IntegerField(choices=CHOICES)
     manga = models.ForeignKey(Manga, on_delete=models.CASCADE,
                               related_name='manga_review')
 

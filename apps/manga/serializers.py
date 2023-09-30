@@ -13,7 +13,7 @@ class ReviewSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Review
-        fields = 'id user text stars manga'.split()
+        fields = 'user text manga'.split()
 
 
 class AuthorSerializer(serializers.ModelSerializer):
@@ -39,7 +39,7 @@ class MangaSerializer(serializers.ModelSerializer):
         model = Manga
         fields = 'id title image description status_release status_translate ' \
                  'number_of_chapters created genre_list manga_review tip author updated release_year ' \
-                 'rating views genre'.split()
+                 ' views genre'.split()
 
     def get_genre_list(self, manga_object):
         return [i.name for i in manga_object.genre.all()]
