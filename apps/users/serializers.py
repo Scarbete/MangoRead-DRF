@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 
-from apps.users.models import CustomUser
+from apps.users.models import CustomUser, Profile
 from apps.users.validators import validate_password
 
 
@@ -36,3 +36,12 @@ class LoginSerializer(serializers.Serializer):
                         'password': {'write_only': True},
                         'refresh_token': {'read_only': True},
                         'access_token': {'read_only': True}}
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
+    class Meta:
+        model = Profile
+        fields = ['id', 'user', 'username', 'nickname', 'image']
+        read_only_fields = ['user']
