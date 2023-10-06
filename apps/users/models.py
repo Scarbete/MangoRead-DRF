@@ -7,6 +7,7 @@ from apps.users.manager import CustomUserManager
 
 # Create your models here.
 class CustomUser(AbstractBaseUser, PermissionsMixin):
+    nickname = models.CharField(max_length=100, blank=True, null=True)
     username = models.CharField(max_length=100, unique=True)
     image = models.ImageField(upload_to='media/avatars/', blank=True, null=True, verbose_name='image_user')
     date_of_birth = models.DateField(null=True)
