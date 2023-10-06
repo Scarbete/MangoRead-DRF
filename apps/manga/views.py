@@ -32,6 +32,8 @@ class ReviewViewSet(ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
     permission_classes = [IsAuthicatedOrReadOnly]
+    pagination_class = MangaPagination
+
 
 
 class TipViewSet(ModelViewSet):
