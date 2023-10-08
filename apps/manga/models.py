@@ -42,7 +42,6 @@ class Manga(models.Model):
     def __str__(self):
         return self.title
 
-
     @property
     def chapters(self):
         if self.number_of_chapters < 1:
