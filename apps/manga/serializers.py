@@ -31,13 +31,14 @@ class GenreSerializer(serializers.ModelSerializer):
 class MangaSerializer(serializers.ModelSerializer):
     author = AuthorSerializer()
     tip = TipSerializer()
+    manga_review = ReviewSerializer(many=True, read_only=True)
     genre_list = serializers.SerializerMethodField()
     genre = serializers.PrimaryKeyRelatedField(many=True, queryset=Genre.objects.all())
 
     class Meta:
         model = Manga
         fields = 'id title image description status_release status_translate ' \
-                 'number_of_chapters created genre_list  tip author updated release_year ' \
+                 'number_of_chapters created genre_list manga_review tip author updated release_year ' \
                  ' views genre'.split()
 
     def get_genre_list(self, manga_object):
