@@ -9,7 +9,15 @@ class TipSerializer(serializers.ModelSerializer):
 
 
 class ReviewSerializer(serializers.ModelSerializer):
-    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        user_representation = {
+            'nickname': instance.user.nickname,
+            'username': instance.user.username,
+            'image': instance.user.image.url
+        }
+        representation.update(user_representation)
+        return representation
 
     class Meta:
         model = Review

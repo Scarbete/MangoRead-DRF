@@ -1,6 +1,6 @@
 
 from .filters import MangaFilter
-from .paginations import MangaPagination
+from .paginations import MangaPagination, ReviewPagination
 from .permissions import IsAuthicatedOrReadOnly
 from .serializers import *
 from .models import *
@@ -32,7 +32,7 @@ class ReviewViewSet(ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
     permission_classes = [IsAuthicatedOrReadOnly]
-    pagination_class = MangaPagination
+    pagination_class = ReviewPagination
 
 
 
